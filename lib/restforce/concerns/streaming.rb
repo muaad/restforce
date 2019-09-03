@@ -49,7 +49,7 @@ module Restforce
 
         def incoming(message, callback)
           callback.call(message).tap do
-            channel = message.fetch('channel').gsub('/topic/', '')
+            channel = message.fetch('channel', 'No channel found!').gsub('/topic/', '')
             replay_id = message.fetch('data', {}).fetch('event', {})['replayId']
 
             handler = @replay_handlers[channel]
